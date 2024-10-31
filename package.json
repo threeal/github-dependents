@@ -12,7 +12,7 @@
     "email": "alfi.maulana.f@gmail.com"
   },
   "repository": "github:threeal/nodejs-starter",
-  "license": "Unlicense",
+  "license": "MIT",
   "author": "Alfi Maulana <alfi.maulana.f@gmail.com>",
   "type": "module",
   "main": "dist/index.js",
