@@ -1,17 +1,19 @@
 {
-  "name": "my_fibonacci",
-  "version": "0.0.0",
-  "description": "A sample Node.js project",
+  "name": "github-dependents",
+  "version": "0.1.0",
+  "description": "Fetch dependent repositories of a GitHub repository",
   "keywords": [
-    "sample",
-    "fibonacci"
+    "github",
+    "dependents",
+    "web-scraping",
+    "scraping"
   ],
-  "homepage": "https://github.com/threeal/nodejs-starter#readme",
+  "homepage": "https://github.com/threeal/github-dependents#readme",
   "bugs": {
-    "url": "https://github.com/threeal/nodejs-starter/issues",
+    "url": "https://github.com/threeal/github-dependents/issues",
     "email": "alfi.maulana.f@gmail.com"
   },
-  "repository": "github:threeal/nodejs-starter",
+  "repository": "github:threeal/github-dependents",
   "license": "MIT",
   "author": "Alfi Maulana <alfi.maulana.f@gmail.com>",
   "type": "module",
