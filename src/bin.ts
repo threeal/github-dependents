@@ -2,22 +2,24 @@
 
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { fibonacciSequence } from "./sequence.js";
+import { fetchDependents } from "./dependents.js";
 
 yargs(hideBin(process.argv))
-  .scriptName("my_fibonacci")
-  .version("0.0.0")
+  .scriptName("github-dependents")
+  .version("0.1.0")
   .command(
-    "$0 <n>",
-    "Generate a Fibonacci sequence up to the given number of terms.",
+    "$0 <repo>",
+    "Fetches the dependent repositories of a given repository.",
     (yargs) =>
-      yargs.positional("n", {
+      yargs.positional("repo", {
         demandOption: true,
-        describe: "The number of terms",
-        type: "number",
+        describe:
+          "The full name of the repository in the format `user/repository`",
+        type: "string",
       }),
-    (argv) => {
-      process.stdout.write(fibonacciSequence(argv.n).join(" ") + "\n");
+    async (argv) => {
+      const dependents = await fetchDependents(argv.repo);
+      process.stdout.write(dependents.join("\n") + "\n");
     },
   )
   .parse();
