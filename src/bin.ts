@@ -18,8 +18,13 @@ yargs(hideBin(process.argv))
         type: "string",
       }),
     async (argv) => {
-      const dependents = await fetchDependents(argv.repo);
-      process.stdout.write(dependents.join("\n") + "\n");
+      try {
+        const dependents = await fetchDependents(argv.repo);
+        process.stdout.write(dependents.join("\n") + "\n");
+      } catch (err) {
+        process.stdout.write(`${err}\n`);
+        process.exitCode = 1;
+      }
     },
   )
   .parse();
