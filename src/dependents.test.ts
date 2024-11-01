@@ -4,7 +4,9 @@ it("should fetch dependents of a repository", async () => {
   const dependents = await fetchDependents("threeal/setup-yarn-action");
   expect(dependents.length).toBeGreaterThan(0);
   for (const dependent of dependents) {
-    expect(dependent).toMatch(/.+\/.+/);
+    expect(dependent.repo).toMatch(/.+\/.+/);
+    expect(dependent.stars).not.toBeNaN();
+    expect(dependent.forks).not.toBeNaN();
   }
 });
 
