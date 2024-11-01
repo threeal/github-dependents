@@ -18,7 +18,7 @@ export async function fetchDependents(repo: string): Promise<string[]> {
 
   const div = dom.window.document.getElementById("dependents");
   if (div !== null) {
-    const box = div.children.item(4);
+    const box = div.children.item(div.children.length - 2);
     if (box !== null) {
       for (let i = 1; i < box.children.length; ++i) {
         const row = box.children.item(i);
