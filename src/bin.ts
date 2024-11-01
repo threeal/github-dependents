@@ -19,7 +19,9 @@ yargs(hideBin(process.argv))
       }),
     async (argv) => {
       const dependents = await fetchDependents(argv.repo);
-      process.stdout.write(dependents.join("\n") + "\n");
+      for (const { repo, stars, forks } of dependents) {
+        process.stdout.write(`${repo}\t${stars} stars\t${forks} forks\n`);
+      }
     },
   )
   .parse();
