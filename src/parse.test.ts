@@ -29,7 +29,7 @@ it("should parse dependents from HTML data", () => {
     ].join("\n"),
   );
 
-  expect(dependents).toEqual(["foo/bar", "foo/baz"]);
+  expect(dependents).toEqual([{ repo: "foo/bar" }, { repo: "foo/baz" }]);
 });
 
 it("should parse dependents from HTML data without details", () => {
@@ -60,7 +60,7 @@ it("should parse dependents from HTML data without details", () => {
     ].join("\n"),
   );
 
-  expect(dependents).toEqual(["foo/bar", "foo/baz"]);
+  expect(dependents).toEqual([{ repo: "foo/bar" }, { repo: "foo/baz" }]);
 });
 
 it("should fail to parse dependents from an invalid HTML data", () => {

@@ -21,7 +21,7 @@ yargs(hideBin(process.argv))
       try {
         const dependents = await fetchDependents(argv.repo);
         for (const dependent of dependents) {
-          process.stdout.write((dependent ?? "null") + "\n");
+          process.stdout.write((dependent.repo ?? "null") + "\n");
         }
       } catch (err) {
         process.stdout.write(`${err}\n`);
