@@ -2,6 +2,8 @@ import { JSDOM } from "jsdom";
 
 export interface Dependent {
   repo: string | null;
+  stars: number | null;
+  forks: number | null;
 }
 
 /**
@@ -21,6 +23,8 @@ export function parseDependentsFromHtml(html: string): Dependent[] {
       for (let i = 1; i < box.children.length; ++i) {
         const dependent: Dependent = {
           repo: null,
+          stars: null,
+          forks: null,
         };
 
         const row = box.children.item(i);
@@ -33,6 +37,19 @@ export function parseDependentsFromHtml(html: string): Dependent[] {
             dependent.repo += "/";
             const repository = span.children.item(1);
             if (repository !== null) dependent.repo += repository.textContent;
+          }
+
+          const div = row.children.item(2);
+          if (div !== null) {
+            const starsSpan = div.children.item(0);
+            if (starsSpan !== null && starsSpan.textContent !== null) {
+              dependent.stars = Number.parseInt(starsSpan.textContent);
+            }
+
+            const forksSpan = div.children.item(1);
+            if (forksSpan !== null && forksSpan.textContent !== null) {
+              dependent.forks = Number.parseInt(forksSpan.textContent);
+            }
           }
         }
 
