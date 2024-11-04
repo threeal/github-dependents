@@ -13,5 +13,6 @@ export async function fetchDependents(repo: string): Promise<Dependent[]> {
     throw new Error(`Failed to fetch ${repo}: ${res.status}`);
   }
 
-  return parseDependentsFromHtml(await res.text());
+  const { dependents } = parseDependentsFromHtml(await res.text());
+  return dependents;
 }
