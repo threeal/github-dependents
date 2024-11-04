@@ -21,7 +21,24 @@ yargs(hideBin(process.argv))
       try {
         const dependents = await fetchDependents(argv.repo);
         for (const dependent of dependents) {
-          process.stdout.write((dependent ?? "null") + "\n");
+          const repo: string = dependent.repo ?? "null";
+          if (repo.length > 32) {
+            process.stdout.write(`${repo.substring(0, 29)}...`);
+          } else {
+            process.stdout.write(repo.padEnd(32));
+          }
+
+          if (dependent.forks !== null) {
+            const forks = dependent.forks.toString();
+            process.stdout.write(`  ${forks.padStart(3)} forks`);
+          }
+
+          if (dependent.stars !== null) {
+            const stars = dependent.stars.toString();
+            process.stdout.write(`  ${stars.padStart(3)} stars`);
+          }
+
+          process.stdout.write("\n");
         }
       } catch (err) {
         process.stdout.write(`${err}\n`);

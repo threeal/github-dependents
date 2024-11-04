@@ -15,12 +15,18 @@ it("should parse dependents from HTML data", () => {
       `      <div>`,
       `        <img></img>`,
       `        <span><a>foo</a>/<a>bar</a><small></small></span>`,
-      `        <div></div>`,
+      `        <div>`,
+      `          <span><svg></svg>11</span>`,
+      `          <span><svg></svg>13</span>`,
+      `        </div>`,
       `      </div>`,
       `      <div>`,
       `        <img></img>`,
       `        <span><a>foo</a>/<a>baz</a><small></small></span>`,
-      `        <div></div>`,
+      `        <div>`,
+      `          <span><svg></svg>13</span>`,
+      `          <span><svg></svg>17</span>`,
+      `        </div>`,
       `      </div>`,
       `    </div>`,
       `    <div></div>`,
@@ -29,7 +35,10 @@ it("should parse dependents from HTML data", () => {
     ].join("\n"),
   );
 
-  expect(dependents).toEqual(["foo/bar", "foo/baz"]);
+  expect(dependents).toEqual([
+    { repo: "foo/bar", stars: 11, forks: 13 },
+    { repo: "foo/baz", stars: 13, forks: 17 },
+  ]);
 });
 
 it("should parse dependents from HTML data without details", () => {
@@ -46,12 +55,18 @@ it("should parse dependents from HTML data without details", () => {
       `      <div>`,
       `        <img></img>`,
       `        <span><a>foo</a>/<a>bar</a><small></small></span>`,
-      `        <div></div>`,
+      `        <div>`,
+      `          <span><svg></svg>11</span>`,
+      `          <span><svg></svg>13</span>`,
+      `        </div>`,
       `      </div>`,
       `      <div>`,
       `        <img></img>`,
       `        <span><a>foo</a>/<a>baz</a><small></small></span>`,
-      `        <div></div>`,
+      `        <div>`,
+      `          <span><svg></svg>13</span>`,
+      `          <span><svg></svg>17</span>`,
+      `        </div>`,
       `      </div>`,
       `    </div>`,
       `    <div></div>`,
@@ -60,7 +75,10 @@ it("should parse dependents from HTML data without details", () => {
     ].join("\n"),
   );
 
-  expect(dependents).toEqual(["foo/bar", "foo/baz"]);
+  expect(dependents).toEqual([
+    { repo: "foo/bar", stars: 11, forks: 13 },
+    { repo: "foo/baz", stars: 13, forks: 17 },
+  ]);
 });
 
 it("should fail to parse dependents from an invalid HTML data", () => {
