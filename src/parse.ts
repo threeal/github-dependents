@@ -29,8 +29,10 @@ export function parseDependentsFromHtml(html: string): string[] {
           dependents.push(dependent);
         }
       }
+
+      return dependents;
     }
   }
 
-  return dependents;
+  throw new Error("invalid HTML format");
 }
