@@ -20,7 +20,9 @@ yargs(hideBin(process.argv))
     async (argv) => {
       try {
         const dependents = await fetchDependents(argv.repo);
-        process.stdout.write(dependents.join("\n") + "\n");
+        for (const dependent of dependents) {
+          process.stdout.write((dependent ?? "null") + "\n");
+        }
       } catch (err) {
         process.stdout.write(`${err}\n`);
         process.exitCode = 1;
