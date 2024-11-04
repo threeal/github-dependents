@@ -2,7 +2,7 @@
 
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
-import { fetchDependents } from "./dependents.js";
+import { fetchDependents } from "./fetch.js";
 
 yargs(hideBin(process.argv))
   .scriptName("github-dependents")

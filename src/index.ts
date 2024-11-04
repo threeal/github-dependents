@@ -1,1 +1,1 @@
-export { fetchDependents } from "./dependents.js";
+export { fetchDependents } from "./fetch.js";

@@ -1,19 +1,13 @@
 import { JSDOM } from "jsdom";
 
 /**
- * Fetches the dependent repositories of a given repository.
+ * Parses the dependent repositories from HTML data.
  *
- * @param repo - The full name of the repository in the format `user/repository`.
+ * @param html - The HTML data.
  * @returns A promise that resolves to a list of dependent repositories.
- * @throws An error if the fetch operation fails.
  */
-export async function fetchDependents(repo: string): Promise<string[]> {
-  const res = await fetch(`https://github.com/${repo}/network/dependents`);
-  if (res.status !== 200) {
-    throw new Error(`Failed to fetch ${repo}: ${res.status}`);
-  }
-
-  const dom = new JSDOM(await res.text());
+export function parseDependentsFromHtml(html: string): string[] {
+  const dom = new JSDOM(html);
   const dependents: string[] = [];
 
   const div = dom.window.document.getElementById("dependents");
