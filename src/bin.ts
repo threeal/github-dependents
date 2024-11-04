@@ -11,15 +11,23 @@ yargs(hideBin(process.argv))
     "$0 <repo>",
     "Fetches the dependent repositories of a given repository.",
     (yargs) =>
-      yargs.positional("repo", {
-        demandOption: true,
-        describe:
-          "The full name of the repository in the format `user/repository`",
-        type: "string",
-      }),
+      yargs
+        .positional("repo", {
+          demandOption: true,
+          describe:
+            "The full name of the repository in the format `user/repository`",
+          type: "string",
+        })
+        .option("max-fetch", {
+          describe: "The maximum number of dependent repositories to fetch",
+          type: "number",
+        }),
     async (argv) => {
       try {
-        const dependents = await fetchDependents(argv.repo);
+        const dependents = await fetchDependents(argv.repo, {
+          maxFetch: argv.maxFetch,
+        });
+
         for (const dependent of dependents) {
           const repo: string = dependent.repo ?? "null";
           if (repo.length > 32) {
