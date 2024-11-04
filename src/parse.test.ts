@@ -62,3 +62,11 @@ it("should parse dependents from HTML data without details", () => {
 
   expect(dependents).toEqual(["foo/bar", "foo/baz"]);
 });
+
+it("should fail to parse dependents from an invalid HTML data", () => {
+  expect(() =>
+    parseDependentsFromHtml(
+      [`<!DOCTYPE html>`, `<body>`, `</body>`].join("\n"),
+    ),
+  ).toThrow("invalid HTML format");
+});
