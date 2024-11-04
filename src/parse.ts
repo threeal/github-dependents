@@ -1,8 +1,22 @@
 import { JSDOM } from "jsdom";
 
+/**
+ * Represents a dependent repository.
+ */
 export interface Dependent {
+  /**
+   * The full name of the dependent repository in the format `user/repository`.
+   */
   repo: string | null;
+
+  /**
+   * The number of stars the dependent repository has.
+   */
   stars: number | null;
+
+  /**
+   * The number of forks the dependent repository has.
+   */
   forks: number | null;
 }
 

@@ -3,7 +3,7 @@ import { Dependent, parseDependentsFromHtml } from "./parse.js";
 /**
  * Options for fetching dependent repositories.
  */
-interface FetchDependentsOptions {
+export interface FetchDependentsOptions {
   /**
    * The maximum number of dependent repositories to fetch.
    */
