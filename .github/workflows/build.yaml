@@ -31,6 +31,9 @@ jobs:
       - name: Test Library
         run: yarn test
 
+      - name: Build Documentation
+        run: yarn docs
+
       - name: Package Library
         run: yarn pack
 
