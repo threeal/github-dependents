@@ -8,11 +8,19 @@ import { Dependent, parseDependentsFromHtml } from "./parse.js";
  * @throws An error if the fetch operation fails.
  */
 export async function fetchDependents(repo: string): Promise<Dependent[]> {
-  const res = await fetch(`https://github.com/${repo}/network/dependents`);
-  if (res.status !== 200) {
-    throw new Error(`Failed to fetch ${repo}: ${res.status}`);
+  const allDependents: Dependent[] = [];
+  let url: string | null = `https://github.com/${repo}/network/dependents`;
+
+  while (url !== null) {
+    const res = await fetch(url);
+    if (res.status !== 200) {
+      throw new Error(`Failed to fetch ${repo}: ${res.status}`);
+    }
+
+    const { dependents, nextPage } = parseDependentsFromHtml(await res.text());
+    allDependents.push(...dependents);
+    url = nextPage;
   }
 
-  const { dependents } = parseDependentsFromHtml(await res.text());
-  return dependents;
+  return allDependents;
 }
