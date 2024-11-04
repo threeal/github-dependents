@@ -7,7 +7,9 @@ import { parseDependentsFromHtml } from "./parse.js";
  * @returns A promise that resolves to a list of dependent repositories.
  * @throws An error if the fetch operation fails.
  */
-export async function fetchDependents(repo: string): Promise<string[]> {
+export async function fetchDependents(
+  repo: string,
+): Promise<(string | null)[]> {
   const res = await fetch(`https://github.com/${repo}/network/dependents`);
   if (res.status !== 200) {
     throw new Error(`Failed to fetch ${repo}: ${res.status}`);
