@@ -1,20 +1,26 @@
 import { parseArguments } from "./internal";
 
 it("should parse arguments", () => {
-  expect(parseArguments("--max-fetch", "8", "a-repo")).toEqual({
+  expect(parseArguments("a-repo", "--max-fetch", "8")).toEqual({
     repo: "a-repo",
+    help: false,
     maxFetch: 8,
   });
 });
 
+it("should parse the help argument", () => {
+  expect(parseArguments("--help")).toEqual({
+    repo: "",
+    help: true,
+  });
+});
+
 it("should fail to parse arguments due to a missing max fetch value", () => {
-  expect(() => parseArguments("--max-fetch")).toThrow(
+  expect(() => parseArguments("a-repo", "--max-fetch")).toThrow(
     "Missing value for the `--max-fetch` option",
   );
 });
 
 it("should fail to parse arguments due to a missing repo argument", () => {
-  expect(() => parseArguments("--max-fetch", "a-repo")).toThrow(
-    "Missing 'repo' argument",
-  );
+  expect(() => parseArguments()).toThrow("Missing 'repo' argument");
 });
