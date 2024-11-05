@@ -13,6 +13,7 @@ export const helpMessage = [
   "",
   "Options:",
   "  --help       Show help                                               [boolean]",
+  "  --version    Show version number                                     [boolean]",
   "  --max-fetch  The maximum number of dependent repositories to fetch    [number]",
   "",
 ].join("\n");
@@ -21,6 +22,8 @@ try {
   const args = parseArguments(...process.argv.slice(2));
   if (args.help) {
     process.stdout.write(helpMessage);
+  } else if (args.version) {
+    process.stdout.write("0.1.0\n");
   } else {
     const dependents = await fetchDependents(args.repo, {
       maxFetch: args.maxFetch,

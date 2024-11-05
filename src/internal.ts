@@ -5,6 +5,7 @@
 export interface Arguments {
   repo: string;
   help: boolean;
+  version: boolean;
   maxFetch?: number | undefined;
 }
 
@@ -23,7 +24,9 @@ export function parseArguments(...argv: string[]): Arguments {
   while (argv.length > 0) {
     const arg = argv.shift();
     if (arg === "-h" || arg === "--help") {
-      return { repo: "", help: true };
+      return { repo: "", help: true, version: false };
+    } else if (arg === "-v" || arg === "--version") {
+      return { repo: "", help: false, version: true };
     } else if (arg === "--max-fetch") {
       const arg = argv.shift();
       if (arg === undefined) {
@@ -39,5 +42,5 @@ export function parseArguments(...argv: string[]): Arguments {
     throw new Error("Missing 'repo' argument");
   }
 
-  return { repo, help: false, maxFetch };
+  return { repo, help: false, version: false, maxFetch };
 }

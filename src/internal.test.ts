@@ -4,6 +4,7 @@ it("should parse arguments", () => {
   expect(parseArguments("a-repo", "--max-fetch", "8")).toEqual({
     repo: "a-repo",
     help: false,
+    version: false,
     maxFetch: 8,
   });
 });
@@ -12,6 +13,15 @@ it("should parse the help argument", () => {
   expect(parseArguments("--help")).toEqual({
     repo: "",
     help: true,
+    version: false,
+  });
+});
+
+it("should parse the version argument", () => {
+  expect(parseArguments("--version")).toEqual({
+    repo: "",
+    help: false,
+    version: true,
   });
 });
 
