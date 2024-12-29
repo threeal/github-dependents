@@ -1,3 +1,4 @@
+import { expect, it } from "vitest";
 import { fetchDependents } from "./fetch.js";
 
 it("should fetch dependents of a repository", async () => {
