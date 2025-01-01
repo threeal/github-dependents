@@ -1,3 +1,4 @@
+import { expect, it } from "vitest";
 import { parseDependentsFromHtml } from "./parse.js";
 
 it("should parse dependents from HTML data", () => {

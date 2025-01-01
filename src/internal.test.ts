@@ -1,3 +1,4 @@
+import { expect, it } from "vitest";
 import { parseArguments } from "./internal";
 
 it("should parse arguments", () => {
