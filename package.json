@@ -32,7 +32,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "jsdom": "^25.0.1"
+    "jsdom": "^26.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
