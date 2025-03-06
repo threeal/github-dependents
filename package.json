@@ -25,7 +25,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "docs": "typedoc src/index.ts",
+    "build:docs": "typedoc src/index.ts",
     "format": "prettier --write --cache .",
     "lint": "eslint",
     "prepack": "tsc",
@@ -46,5 +46,9 @@
     "typescript-eslint": "^8.26.0",
     "vitest": "^3.0.7"
   },
-  "packageManager": "yarn@4.6.0"
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
 }
