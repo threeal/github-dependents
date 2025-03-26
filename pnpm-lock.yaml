@@ -13,8 +13,8 @@ importers:
         version: 26.0.0
     devDependencies:
       '@eslint/js':
-        specifier: ^9.22.0
-        version: 9.22.0
+        specifier: ^9.23.0
+        version: 9.23.0
       '@tsconfig/node23':
         specifier: ^23.0.0
         version: 23.0.0
