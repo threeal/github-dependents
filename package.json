@@ -31,7 +31,7 @@
     "jsdom": "^26.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.25.1",
+    "@eslint/js": "^9.26.0",
     "@tsconfig/node23": "^23.0.1",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.15.3",
