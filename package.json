@@ -24,7 +24,7 @@
     "dist"
   ],
   "scripts": {
-    "prepack": "tsc",
+    "prepack": "tsc -p tsconfig.build.json",
     "test": "vitest run"
   },
   "dependencies": {
