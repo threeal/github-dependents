@@ -53,21 +53,25 @@ export function parseDependentsFromHtml(html: string): {
         const span = row.children.item(1);
         if (span !== null) {
           const user = span.children.item(0);
-          if (user !== null) dependent.repo += user.textContent;
+          if (user?.textContent) {
+            dependent.repo += user.textContent;
+          }
           dependent.repo += "/";
           const repository = span.children.item(1);
-          if (repository !== null) dependent.repo += repository.textContent;
+          if (repository?.textContent) {
+            dependent.repo += repository.textContent;
+          }
         }
 
         const div = row.children.item(2);
         if (div !== null) {
           const starsSpan = div.children.item(0);
-          if (starsSpan !== null && starsSpan.textContent !== null) {
+          if (starsSpan?.textContent) {
             dependent.stars = Number.parseInt(starsSpan.textContent);
           }
 
           const forksSpan = div.children.item(1);
-          if (forksSpan !== null && forksSpan.textContent !== null) {
+          if (forksSpan?.textContent) {
             dependent.forks = Number.parseInt(forksSpan.textContent);
           }
         }

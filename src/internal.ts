@@ -33,8 +33,8 @@ export function parseArguments(...argv: string[]): Arguments {
         throw new Error("Missing value for the `--max-fetch` option");
       }
       maxFetch = parseInt(arg);
-    } else if (repo === undefined) {
-      repo = arg;
+    } else {
+      repo ??= arg;
     }
   }
 
