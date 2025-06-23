@@ -51,7 +51,7 @@ try {
     }
   }
 } catch (err) {
-  process.stderr.write(`${err}\n`);
+  process.stderr.write(`${err as string}\n`);
   process.stdout.write(`\n${helpMessage}`);
   process.exitCode = 1;
 }

@@ -28,18 +28,14 @@ export async function fetchDependents(
   while (url !== null) {
     const res = await fetch(url);
     if (res.status !== 200) {
-      throw new Error(`Failed to fetch ${repo}: ${res.status}`);
+      throw new Error(`Failed to fetch ${repo}: ${res.status.toString()}`);
     }
 
     const { dependents, nextPage } = parseDependentsFromHtml(await res.text());
     allDependents.push(...dependents);
     url = nextPage;
 
-    if (
-      options !== undefined &&
-      options.maxFetch !== undefined &&
-      allDependents.length >= options.maxFetch
-    ) {
+    if (options?.maxFetch && allDependents.length >= options.maxFetch) {
       allDependents.splice(options.maxFetch);
       break;
     }
