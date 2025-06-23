@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { parseArguments } from "./internal";
+import { parseArguments } from "./internal.js";
 
 it("should parse arguments", () => {
   expect(parseArguments("a-repo", "--max-fetch", "8")).toEqual({
