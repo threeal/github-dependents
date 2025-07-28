@@ -17,4 +17,4 @@ pre-commit:
       run: pnpm typedoc src/index.ts --emit none --treatWarningsAsErrors
 
     - name: check diff
-      run: git diff --exit-code {staged_files}
+      run: git diff --exit-code pnpm-lock.yaml {staged_files}
