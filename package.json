@@ -28,7 +28,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "jsdom": "^28.1.0"
+    "jsdom": "^29.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
