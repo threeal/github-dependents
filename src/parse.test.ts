@@ -48,6 +48,75 @@ it("should parse dependents from HTML data", () => {
   });
 });
 
+it("should parse dependents with missing data from HTML data", () => {
+  const dependents = parseDependentsFromHtml(
+    [
+      `<!DOCTYPE html>`,
+      `<body>`,
+      `  <div id="dependents">`,
+      `    <div>`,
+      `      <div></div>`,
+      `      <div>`,
+      `        <img></img>`,
+      `      </div>`,
+      `      <div>`,
+      `        <img></img>`,
+      `        <span></span>`,
+      `        <div></div>`,
+      `      </div>`,
+      `      <div>`,
+      `        <img></img>`,
+      `        <span><a></a>/<a></a></span>`,
+      `        <div>`,
+      `          <span></span>`,
+      `          <span></span>`,
+      `        </div>`,
+      `      </div>`,
+      `    </div>`,
+      `    <div>`,
+      `      <div>`,
+      `        <button></button>`,
+      `      </div>`,
+      `    </div>`,
+      `  </div>`,
+      `</body>`,
+    ].join("\n"),
+  );
+
+  expect(dependents).toEqual({
+    dependents: [
+      { repo: "", stars: null, forks: null },
+      { repo: "/", stars: null, forks: null },
+      { repo: "/", stars: null, forks: null },
+    ],
+    nextPage: null,
+  });
+});
+
+it("should parse dependents from an empty HTML data", () => {
+  expect(
+    parseDependentsFromHtml(
+      [
+        `<!DOCTYPE html>`,
+        `<body>`,
+        `  <div id="dependents"></div>`,
+        `</body>`,
+      ].join("\n"),
+    ),
+  ).toEqual({ dependents: [], nextPage: null });
+
+  expect(
+    parseDependentsFromHtml(
+      [
+        `<!DOCTYPE html>`,
+        `<body>`,
+        `  <div id="dependents"><div></div></div>`,
+        `</body>`,
+      ].join("\n"),
+    ),
+  ).toEqual({ dependents: [], nextPage: null });
+});
+
 it("should fail to parse dependents from an invalid HTML data", () => {
   expect(() =>
     parseDependentsFromHtml(
