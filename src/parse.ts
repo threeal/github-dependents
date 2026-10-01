@@ -40,40 +40,37 @@ export function parseDependentsFromHtml(html: string): {
 
   const box = div.children.item(div.children.length - 2);
   if (box !== null) {
-    for (let i = 1; i < box.children.length; ++i) {
+    for (const row of Array.from(box.children).slice(1)) {
       const dependent: Dependent = {
         repo: null,
         stars: null,
         forks: null,
       };
 
-      const row = box.children.item(i);
-      if (row !== null) {
-        dependent.repo = "";
-        const span = row.children.item(1);
-        if (span !== null) {
-          const user = span.children.item(0);
-          if (user?.textContent) {
-            dependent.repo += user.textContent;
-          }
-          dependent.repo += "/";
-          const repository = span.children.item(1);
-          if (repository?.textContent) {
-            dependent.repo += repository.textContent;
-          }
+      dependent.repo = "";
+      const span = row.children.item(1);
+      if (span !== null) {
+        const user = span.children.item(0);
+        if (user?.textContent) {
+          dependent.repo += user.textContent;
+        }
+        dependent.repo += "/";
+        const repository = span.children.item(1);
+        if (repository?.textContent) {
+          dependent.repo += repository.textContent;
+        }
+      }
+
+      const div = row.children.item(2);
+      if (div !== null) {
+        const starsSpan = div.children.item(0);
+        if (starsSpan?.textContent) {
+          dependent.stars = Number.parseInt(starsSpan.textContent);
         }
 
-        const div = row.children.item(2);
-        if (div !== null) {
-          const starsSpan = div.children.item(0);
-          if (starsSpan?.textContent) {
-            dependent.stars = Number.parseInt(starsSpan.textContent);
-          }
-
-          const forksSpan = div.children.item(1);
-          if (forksSpan?.textContent) {
-            dependent.forks = Number.parseInt(forksSpan.textContent);
-          }
+        const forksSpan = div.children.item(1);
+        if (forksSpan?.textContent) {
+          dependent.forks = Number.parseInt(forksSpan.textContent);
         }
       }
 
